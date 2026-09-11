@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar em CSS puro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 1. Escondemos o checkbox original */
+        #menu-toggle {
+            display: none;
+        }
+
+        /* 2. Estilo do botão de ABRIR o menu */
+        .btn-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+            user-select: none;
+        }
+
+        /* 3. Estilo da Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            /* Fica 'escondida' fora da tela à esquerda */
+            width: 250px;
+            height: 100vh;
+            background-color: #1e1e2f;
+            color: #fff;
+            padding: 20px;
+            transition: left 0.3s ease;
+            /* Animação suave para deslizar */
+            z-index: 100;
+        }
+
+        /* Estilo do botão de fechar (X) dentro da sidebar */
+        .btn-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .btn-close:hover {
+            color: #fff;
+        }
+
+        /* Estilo dos Links na Sidebar */
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            color: #fff;
+        }
+
+        /* 4. A MÁGICA DO CSS */
+        /* Quando o checkbox estiver Marcado (:checked), a sidebar entra na tela */
+        #menu-toggle:checked~.sidebar {
+            left: 0;
+            /* Move a sidebar para visível */
+        }
+
+        /* Estilo do conteúdo principal */
+        .content {
+            padding: 80px 20px;
+        }
+
+        /* DIV */
+        .card {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            cursor: pointer;
+            /* Essencial para indicar que o elemento é clicável */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Checkbox invisível que guarda o estado (aberto/fechado) -->
+    <input type="checkbox" id="menu-toggle">
+
+    <!-- Botão de ABRIR (é uma <label> associada ao checkbox acima) -->
+    <label for="menu-toggle" class="btn-toggle">
+        &#9776; Menu
+    </label>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <!-- Botão de FECHAR dentro da sidebar -->
+        <label for="menu-toggle" class="btn-close">&times;</label>
+
+        <h2>Navegação</h2>
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="content">
+        <h1>Conteúdo da Página</h1>
+        <p>Esta barra lateral funciona 100% apenas com HTML e CSS!</p>
+        <div class="card" onclick="minhaAcao()" tabindex="0" role="button">
+            <h3>Card Acessível</h3>
+        </div>
+    </main>
+    <script>
+        function minhaAcao() {
+            alert("Você clicou na DIV!");
+        }
+    </script>
+</body>
+
+</html>
